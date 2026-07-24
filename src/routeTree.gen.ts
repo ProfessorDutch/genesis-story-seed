@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ThoughtcastsRouteImport } from './routes/thoughtcasts'
 import { Route as PodcastRouteImport } from './routes/podcast'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ThoughtcastsSlugRouteImport } from './routes/thoughtcasts.$slug'
 import { Route as PodcastSlugRouteImport } from './routes/podcast.$slug'
 
 const ThoughtcastsRoute = ThoughtcastsRouteImport.update({
@@ -29,6 +30,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ThoughtcastsSlugRoute = ThoughtcastsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ThoughtcastsRoute,
+} as any)
 const PodcastSlugRoute = PodcastSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -38,34 +44,53 @@ const PodcastSlugRoute = PodcastSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/podcast': typeof PodcastRouteWithChildren
-  '/thoughtcasts': typeof ThoughtcastsRoute
+  '/thoughtcasts': typeof ThoughtcastsRouteWithChildren
   '/podcast/$slug': typeof PodcastSlugRoute
+  '/thoughtcasts/$slug': typeof ThoughtcastsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/podcast': typeof PodcastRouteWithChildren
-  '/thoughtcasts': typeof ThoughtcastsRoute
+  '/thoughtcasts': typeof ThoughtcastsRouteWithChildren
   '/podcast/$slug': typeof PodcastSlugRoute
+  '/thoughtcasts/$slug': typeof ThoughtcastsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/podcast': typeof PodcastRouteWithChildren
-  '/thoughtcasts': typeof ThoughtcastsRoute
+  '/thoughtcasts': typeof ThoughtcastsRouteWithChildren
   '/podcast/$slug': typeof PodcastSlugRoute
+  '/thoughtcasts/$slug': typeof ThoughtcastsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/podcast' | '/thoughtcasts' | '/podcast/$slug'
+  fullPaths:
+    | '/'
+    | '/podcast'
+    | '/thoughtcasts'
+    | '/podcast/$slug'
+    | '/thoughtcasts/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/podcast' | '/thoughtcasts' | '/podcast/$slug'
-  id: '__root__' | '/' | '/podcast' | '/thoughtcasts' | '/podcast/$slug'
+  to:
+    | '/'
+    | '/podcast'
+    | '/thoughtcasts'
+    | '/podcast/$slug'
+    | '/thoughtcasts/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/podcast'
+    | '/thoughtcasts'
+    | '/podcast/$slug'
+    | '/thoughtcasts/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PodcastRoute: typeof PodcastRouteWithChildren
-  ThoughtcastsRoute: typeof ThoughtcastsRoute
+  ThoughtcastsRoute: typeof ThoughtcastsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -91,6 +116,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/thoughtcasts/$slug': {
+      id: '/thoughtcasts/$slug'
+      path: '/$slug'
+      fullPath: '/thoughtcasts/$slug'
+      preLoaderRoute: typeof ThoughtcastsSlugRouteImport
+      parentRoute: typeof ThoughtcastsRoute
+    }
     '/podcast/$slug': {
       id: '/podcast/$slug'
       path: '/$slug'
@@ -112,10 +144,22 @@ const PodcastRouteChildren: PodcastRouteChildren = {
 const PodcastRouteWithChildren =
   PodcastRoute._addFileChildren(PodcastRouteChildren)
 
+interface ThoughtcastsRouteChildren {
+  ThoughtcastsSlugRoute: typeof ThoughtcastsSlugRoute
+}
+
+const ThoughtcastsRouteChildren: ThoughtcastsRouteChildren = {
+  ThoughtcastsSlugRoute: ThoughtcastsSlugRoute,
+}
+
+const ThoughtcastsRouteWithChildren = ThoughtcastsRoute._addFileChildren(
+  ThoughtcastsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PodcastRoute: PodcastRouteWithChildren,
-  ThoughtcastsRoute: ThoughtcastsRoute,
+  ThoughtcastsRoute: ThoughtcastsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
