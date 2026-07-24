@@ -45,7 +45,7 @@ export const Route = createFileRoute("/podcast/$slug")({
 function EpisodePage() {
   const ep = Route.useLoaderData();
   const related = (ep.relatedThoughtcasts ?? [])
-    .map((s) => thoughtcasts.find((t) => t.slug === s))
+    .map((s: string) => thoughtcasts.find((t) => t.slug === s))
     .filter(Boolean) as typeof thoughtcasts;
   const otherEpisodes = episodes.filter((e) => e.slug !== ep.slug).slice(0, 3);
 
@@ -95,7 +95,7 @@ function EpisodePage() {
                 In this episode
               </div>
               <ul className="mt-4 space-y-3 text-sm text-ink/80">
-                {ep.tags.map((tag) => (
+                {ep.tags.map((tag: string) => (
                   <li key={tag} className="border-b border-line pb-3 last:border-b-0">
                     {tag}
                   </li>
