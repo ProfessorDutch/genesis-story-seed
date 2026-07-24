@@ -2,6 +2,15 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Phone } from "lucide-react";
 import { episodes, thoughtcasts } from "@/lib/content";
 
+const frameStyle = (url?: string) =>
+  url
+    ? {
+        backgroundImage: `linear-gradient(180deg, transparent 45%, oklch(0.12 0.012 55 / 0.78)), url(${url})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }
+    : undefined;
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -67,7 +76,7 @@ function Home() {
             </div>
           </div>
           <div className="mt-14 md:mt-0">
-            <div className="portrait-frame relative">
+            <div className="portrait-frame relative" style={frameStyle(featured.image)}>
               <div className="absolute bottom-5 left-5 right-5 text-white/85">
                 <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-ember">
                   Episode 01 · Now streaming
@@ -146,6 +155,7 @@ function Home() {
               to="/podcast/$slug"
               params={{ slug: featured.slug }}
               className="portrait-frame block"
+              style={frameStyle(featured.image)}
             />
             <div>
               <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-ember">
@@ -218,7 +228,10 @@ function Home() {
                 params={{ slug: t.slug }}
                 className="group flex flex-col border border-line bg-paper p-6 transition-colors hover:border-ember"
               >
-                <div className="portrait-frame mb-6" style={{ aspectRatio: "9/12" }} />
+                <div
+                  className="portrait-frame mb-6"
+                  style={{ aspectRatio: "9/12", ...frameStyle(t.image) }}
+                />
                 <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-ember">
                   {t.topic} · {t.duration}
                 </div>
