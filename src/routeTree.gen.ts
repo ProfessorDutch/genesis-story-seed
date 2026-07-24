@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ThoughtcastsRouteImport } from './routes/thoughtcasts'
+import { Route as TellYourStoryRouteImport } from './routes/tell-your-story'
 import { Route as PodcastRouteImport } from './routes/podcast'
 import { Route as MustardSeedRouteImport } from './routes/mustard-seed'
 import { Route as IndexRouteImport } from './routes/index'
@@ -19,6 +20,11 @@ import { Route as PodcastSlugRouteImport } from './routes/podcast.$slug'
 const ThoughtcastsRoute = ThoughtcastsRouteImport.update({
   id: '/thoughtcasts',
   path: '/thoughtcasts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TellYourStoryRoute = TellYourStoryRouteImport.update({
+  id: '/tell-your-story',
+  path: '/tell-your-story',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PodcastRoute = PodcastRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/mustard-seed': typeof MustardSeedRoute
   '/podcast': typeof PodcastRouteWithChildren
+  '/tell-your-story': typeof TellYourStoryRoute
   '/thoughtcasts': typeof ThoughtcastsRouteWithChildren
   '/podcast/$slug': typeof PodcastSlugRoute
   '/thoughtcasts/$slug': typeof ThoughtcastsSlugRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/mustard-seed': typeof MustardSeedRoute
   '/podcast': typeof PodcastRouteWithChildren
+  '/tell-your-story': typeof TellYourStoryRoute
   '/thoughtcasts': typeof ThoughtcastsRouteWithChildren
   '/podcast/$slug': typeof PodcastSlugRoute
   '/thoughtcasts/$slug': typeof ThoughtcastsSlugRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/mustard-seed': typeof MustardSeedRoute
   '/podcast': typeof PodcastRouteWithChildren
+  '/tell-your-story': typeof TellYourStoryRoute
   '/thoughtcasts': typeof ThoughtcastsRouteWithChildren
   '/podcast/$slug': typeof PodcastSlugRoute
   '/thoughtcasts/$slug': typeof ThoughtcastsSlugRoute
@@ -78,6 +87,7 @@ export interface FileRouteTypes {
     | '/'
     | '/mustard-seed'
     | '/podcast'
+    | '/tell-your-story'
     | '/thoughtcasts'
     | '/podcast/$slug'
     | '/thoughtcasts/$slug'
@@ -86,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/mustard-seed'
     | '/podcast'
+    | '/tell-your-story'
     | '/thoughtcasts'
     | '/podcast/$slug'
     | '/thoughtcasts/$slug'
@@ -94,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/mustard-seed'
     | '/podcast'
+    | '/tell-your-story'
     | '/thoughtcasts'
     | '/podcast/$slug'
     | '/thoughtcasts/$slug'
@@ -103,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   MustardSeedRoute: typeof MustardSeedRoute
   PodcastRoute: typeof PodcastRouteWithChildren
+  TellYourStoryRoute: typeof TellYourStoryRoute
   ThoughtcastsRoute: typeof ThoughtcastsRouteWithChildren
 }
 
@@ -113,6 +126,13 @@ declare module '@tanstack/react-router' {
       path: '/thoughtcasts'
       fullPath: '/thoughtcasts'
       preLoaderRoute: typeof ThoughtcastsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tell-your-story': {
+      id: '/tell-your-story'
+      path: '/tell-your-story'
+      fullPath: '/tell-your-story'
+      preLoaderRoute: typeof TellYourStoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/podcast': {
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   MustardSeedRoute: MustardSeedRoute,
   PodcastRoute: PodcastRouteWithChildren,
+  TellYourStoryRoute: TellYourStoryRoute,
   ThoughtcastsRoute: ThoughtcastsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
