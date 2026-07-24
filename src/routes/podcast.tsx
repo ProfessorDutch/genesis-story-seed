@@ -48,7 +48,18 @@ function PodcastIndex() {
             params={{ slug: featured.slug }}
             className="grid gap-8 md:grid-cols-[1fr_1.2fr] md:items-center md:gap-14"
           >
-            <div className="portrait-frame" />
+            <div
+              className="portrait-frame"
+              style={
+                featured.image
+                  ? {
+                      backgroundImage: `linear-gradient(180deg, transparent 45%, oklch(0.12 0.012 55 / 0.78)), url(${featured.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }
+                  : undefined
+              }
+            />
             <div>
               <div className="text-[10px] font-bold uppercase tracking-[0.20em] text-ember">
                 Latest · Episode {String(featured.number).padStart(2, "0")}
