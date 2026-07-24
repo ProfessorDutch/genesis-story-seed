@@ -1,3 +1,17 @@
+import heroCraftsman from "@/assets/hero-craftsman.jpg";
+import tcHands from "@/assets/tc-hands.jpg";
+import tcPrayer from "@/assets/tc-prayer.jpg";
+import tcMentor from "@/assets/tc-mentor.jpg";
+import mustardYouth from "@/assets/mustard-youth.jpg";
+
+export const images = {
+  heroCraftsman,
+  tcHands,
+  tcPrayer,
+  tcMentor,
+  mustardYouth,
+};
+
 export type Episode = {
   slug: string;
   number: number;
@@ -9,6 +23,7 @@ export type Episode = {
   duration: string;
   publishedAt: string;
   tags: string[];
+  image?: string;
   youtubeId?: string;
   audioUrl?: string;
   website?: string;
@@ -24,6 +39,7 @@ export type Thoughtcast = {
   topic: string;
   duration: string;
   publishedAt: string;
+  image?: string;
   youtubeId?: string;
   relatedEpisode?: string;
 };
@@ -42,6 +58,7 @@ export const episodes: Episode[] = [
     duration: "52 min",
     publishedAt: "2025-01-14",
     tags: ["Fatherhood", "Trades", "First Believers"],
+    image: heroCraftsman,
     youtubeId: "dQw4w9WgXcQ",
     website: "https://example.com",
     relatedThoughtcasts: ["the-thought-you-almost-quit-on", "belief-before-proof"],
@@ -59,6 +76,7 @@ export const episodes: Episode[] = [
     duration: "1 hr 4 min",
     publishedAt: "2025-02-02",
     tags: ["Marriage", "Failure", "Second Chances"],
+    image: tcPrayer,
     youtubeId: "dQw4w9WgXcQ",
     relatedThoughtcasts: ["the-prayer-she-never-told-me-about"],
   },
@@ -75,6 +93,7 @@ export const episodes: Episode[] = [
     duration: "47 min",
     publishedAt: "2025-02-21",
     tags: ["Mentorship", "Trades", "Redemption"],
+    image: tcMentor,
     youtubeId: "dQw4w9WgXcQ",
   },
   {
@@ -90,6 +109,7 @@ export const episodes: Episode[] = [
     duration: "58 min",
     publishedAt: "2025-03-10",
     tags: ["Faith", "Calling", "Community"],
+    image: mustardYouth,
     youtubeId: "dQw4w9WgXcQ",
   },
 ];
@@ -104,6 +124,7 @@ export const thoughtcasts: Thoughtcast[] = [
     topic: "Belief",
     duration: "1:12",
     publishedAt: "2025-01-20",
+    image: heroCraftsman,
     youtubeId: "dQw4w9WgXcQ",
     relatedEpisode: "the-first-toolbox",
   },
@@ -116,6 +137,7 @@ export const thoughtcasts: Thoughtcast[] = [
     topic: "Perseverance",
     duration: "0:54",
     publishedAt: "2025-01-27",
+    image: tcHands,
     youtubeId: "dQw4w9WgXcQ",
     relatedEpisode: "the-first-toolbox",
   },
@@ -128,6 +150,7 @@ export const thoughtcasts: Thoughtcast[] = [
     topic: "Prayer",
     duration: "1:06",
     publishedAt: "2025-02-05",
+    image: tcPrayer,
     youtubeId: "dQw4w9WgXcQ",
     relatedEpisode: "she-believed-before-i-did",
   },
@@ -140,6 +163,7 @@ export const thoughtcasts: Thoughtcast[] = [
     topic: "Mentorship",
     duration: "1:22",
     publishedAt: "2025-02-14",
+    image: tcMentor,
     youtubeId: "dQw4w9WgXcQ",
   },
   {
@@ -151,6 +175,7 @@ export const thoughtcasts: Thoughtcast[] = [
     topic: "Identity",
     duration: "1:04",
     publishedAt: "2025-02-25",
+    image: mustardYouth,
     youtubeId: "dQw4w9WgXcQ",
   },
   {
@@ -162,6 +187,7 @@ export const thoughtcasts: Thoughtcast[] = [
     topic: "The Mustard Seed",
     duration: "1:18",
     publishedAt: "2025-03-04",
+    image: mustardYouth,
     youtubeId: "dQw4w9WgXcQ",
   },
 ];
