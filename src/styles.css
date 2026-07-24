@@ -206,12 +206,12 @@
   background-color: oklch(0.22 0.012 55);
   background-size: cover;
   background-position: center;
-}
 
-@utility portrait-image::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 45%, oklch(0.15 0.012 55 / 0.75));
-  pointer-events: none;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 45%, oklch(0.15 0.012 55 / 0.75));
+    pointer-events: none;
+  }
 }
